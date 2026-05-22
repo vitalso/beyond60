@@ -137,9 +137,9 @@
 		</div>
 
 		<!-- Background video -->
-		<!--<video class="absolute top-0 left-0 w-full h-full object-cover z-1" loop muted autoplay playsinline poster="/hero-image.jpg">
+		<video class="absolute top-0 left-0 w-full h-full object-cover z-1" loop muted autoplay playsinline poster="/hero-image.jpg">
 			<source src="/footage.mp4" type="video/mp4">
-		</video>-->
+		</video>
 	</section>
 
 	<section class="py-17.5 md:py-25">
