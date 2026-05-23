@@ -6,6 +6,13 @@
 
 .bg-hero {
     background-image: url("/hero-image.jpg");
+}
+
+.bg-benefits {
+    background-image: url("/bg-benefits.webp");
+}
+
+.bg-hero , .bg-benfits {
     background-size: cover;
     background-position: center;
     position: relative;

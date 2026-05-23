@@ -24,10 +24,10 @@
 				>
 					<!-- Question -->
 					<div
-						class="flex gap-5"
+						class="flex gap-5 items-center"
 						@click="toggleQuestion(index)"
 					>
-						<h3 class="text-lg text-black">{{ item.question }}</h3>
+						<h3 class="text-lg text-black flex-1">{{ item.question }}</h3>
 						<svg
 							width="24"
 							height="24"
