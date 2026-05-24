@@ -1,7 +1,7 @@
 <template>
 	<section class="py-0 md:py-12.5">
 		<div class="max-w-323 md:px-4 mx-auto">
-			<div class="rounded-tl-lg rounded-tr-lg overflow-hidden text-white min-h-150 join-discover px-5 pb-17.5 pt-25 md:p-12.5 flex flex-col justify-end relative">
+			<div class="rounded-tl-lg rounded-tr-lg text-white min-h-150 join-discover px-5 pb-17.5 pt-25 md:p-12.5 flex flex-col justify-end relative">
 				<div class="flex flex-col gap-5 items-start relative z-2">
 					<!-- Section tag -->
 					<div class="inline-flex gap-3.5 items-center p-3 rounded-[90px] text-base font-semibold border border-stroke-100/20 bg-white/5 backdrop-blur-lg">
