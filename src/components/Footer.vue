@@ -8,7 +8,7 @@
 					<span>Beyond 60°</span>
 				</RouterLink>
 				<p class="font-medium text-lg text-gray-100">A quiet network for <br> extraordinary places.</p>
-				<Button as="RouterLink" to="/register" size="medium" variant="primary">
+				<Button as="RouterLink" to="/register" size="medium" variant="primary" class="text-white!">
 					Register now
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M8.33334 5.8335L11.6667 10.0002L8.33334 14.1668" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>

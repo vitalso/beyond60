@@ -16,6 +16,10 @@
     background-image: url("/hero-about-us.webp");
 }
 
+.bg-sign-up-hero {
+    background-image: url("/bg-sign-up-hero.webp");
+}
+
 .bg-hero , .bg-benfits {
     background-size: cover;
     background-position: center;
@@ -76,6 +80,10 @@
     z-index: 0;
 }
 
+.bg-process.sign-up-form::before {
+    top: 230px;
+}
+
 @layer utilities {
   .progressive-blur {
     backdrop-filter: blur(10px);
@@ -101,6 +109,7 @@
     --color-black: #1E1E1E;
     --color-gray-100: #777777;
     --color-cream: #F1EFEE;
+    --color-accent-red: #FF383C;
 
     /* Border */
     --color-stroke-100: #E5E5E5;
@@ -114,4 +123,7 @@
     --text-6xl--line-height: calc(1.08);
 
     --text-5xl--line-height: calc(1.1);
+
+    /* Breakpoints */
+    --breakpoint-xs: 380px;
 }

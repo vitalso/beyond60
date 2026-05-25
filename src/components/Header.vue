@@ -36,7 +36,7 @@
 						Log in
 					</Button>
 
-					<Button as="RouterLink" to="/register" variant="primary">
+					<Button as="RouterLink" to="/register" variant="primary" class="text-white!">
 						Register
 					</Button>
 				</div>

@@ -40,11 +40,11 @@ const tag = computed(() => {
   return props.as
 })
 
-const baseClasses = 'leading-[22px] font-semibold rounded-[90px] transition-all inline-flex items-center gap-2.5'
+const baseClasses = 'leading-[22px] font-semibold rounded-[90px] transition-all inline-flex items-center gap-2.5 cursor-pointer'
 
 const variantClasses = computed(() => ({
   primary:
-    'bg-black text-white shadow-sm-dark',
+    'bg-black text-white shadow-sm-dark disabled:opacity-30 disabled:poointer-events-none disabled:cursor-default',
   secondary:
     'bg-white text-black border border-stroke-100 shadow-sm',
 })[props.variant])
