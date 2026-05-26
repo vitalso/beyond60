@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-cream pt-30 md:pt-40 pb-12.5 font-semibold bg-process relative">
+  <section class="pt-30 md:pt-40 pb-12.5 font-semibold bg-process relative">
 		<div class="container z-2 relative">
 			<!-- Section tag and title  -->
 			<div class="text-center mb-10">
@@ -24,19 +24,19 @@
 			</div>
 		</div>
 
-		<div class="max-w-323 mx-auto px-4 pt-10 grid grid-cols-2 gap-5 relative z-2">
+		<div class="max-w-323 mx-auto px-4 pt-10 grid md:grid-cols-2 gap-5 relative z-2">
 			<!-- Properties by country -->
 			<RouterLink
-				class="rounded-lg p-2.5 overflow-hidden relative overlay min-h-100 text-white!"
+				class="rounded-lg p-2.5 overflow-hidden relative overlay min-h-87.5 md:min-h-100 text-white!"
 				v-for="item in properties"
 				:key="item"
-				:to="'parkings/' + item.id"
+				:to="'properties/' + item.id"
 			>
 				<img :src="item.img" :alt="item.country" class="absolute object-cover w-full h-full inset-0">
 				<h3 class="font-semibold absolute top-1/2 left-1/2 -translate-1/2 text-4xl z-2">{{ item.country }}</h3>
 				<!-- Details -->
-				<div class="flex gap-5 absolute bottom-7.5 left-7.5 z-2">
-					<div class="inline-flex gap-3 items-center">
+				<div class="flex max-xs:text-sm gap-4 lg:gap-5 absolute bottom-7.5 left-5 lg:left-7.5 z-2">
+					<div class="inline-flex gap-2 xs:gap-3 items-center">
 						<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M6.45898 9.16663V12.5M12.918 9.16663V12.5M9.68847 7.49996V14.1666M16.9548 8.45857V14.9723C16.9548 16.8285 15.5089 18.3333 13.7253 18.3333H5.65161C3.86801 18.3333 2.42212 16.8285 2.42212 14.9723V8.45857C2.42212 7.44944 2.85781 6.49371 3.60885 5.8554L7.64571 2.42442C8.83452 1.41403 10.5424 1.41403 11.7312 2.42441L15.7681 5.85539C16.5191 6.49371 16.9548 7.44944 16.9548 8.45857Z" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
 						</svg>

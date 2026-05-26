@@ -27,7 +27,7 @@ const props = defineProps({
   size: {
     type: String,
     default: 'medium',
-    validator: (v) => ['medium', 'large'].includes(v),
+    validator: (v) => ['medium', 'large' , 'xl'].includes(v),
   },
   disabled: {
     type: Boolean,
@@ -53,6 +53,7 @@ const sizeClasses = computed(() => ({
   // small: 'px-3 py-2 text-sm',
   medium: 'p-3 text-base',
   large: 'p-[15px] text-lg',
+  xl: 'p-5 text-xl'
 })[props.size])
 </script>
 

@@ -99,6 +99,17 @@
     );
     backdrop-filter: blur(10px);
   }
+
+  .divider::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    background-color: var(--color-stroke-100);
+    top: 50%;
+    right: -20px;
+    transform: translateY(-15px);
+  }
 }
 
 @theme {
