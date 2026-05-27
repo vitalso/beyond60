@@ -119,8 +119,12 @@
     --color-dark: #000;
     --color-black: #1E1E1E;
     --color-gray-100: #777777;
+    --color-gray-200: #F5F5F5;
+    --color-gray-300: #D0D5DD;
     --color-cream: #F1EFEE;
     --color-accent-red: #FF383C;
+    --color-blue-50: #E6F3FF;
+    --color-blue-700: #3398FF;
 
     /* Border */
     --color-stroke-100: #E5E5E5;

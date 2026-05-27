@@ -10,7 +10,10 @@
       <!-- Search form -->
       <div class="bg-white border border-stroke-100 rounded-3xl lg:rounded-[90px] max-w-250 mx-auto px-3 max-md:py-3 md:px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center gap-y-1 md:gap-y-5 gap-x-10 lg:gap-10">
         <!-- Where -->
-        <div class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden">
+        <div
+          class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden"
+          @click="selectWhere"
+        >
           <p class="text-gray-100">Where</p>
           <div class="inline-flex gap-2.5 items-center">
             <span>Iceland</span>
@@ -22,10 +25,78 @@
               Select city
             </button>
           </div>
+
+          <!-- Dropdown -->
+          <SearchFormDropdown
+            v-model="whereDropdown"
+            @close="whereDropdown = false"
+            @click.stop
+            class="min-w-125"
+          >
+            <template #title>
+              Where
+            </template>
+
+            <template #content>
+              <!-- Country -->
+              <div class="p-5">
+                <p class="font-medium mb-5">Country</p>
+
+                <div class="grid grid-cols-4 gap-2.5">
+                  <!-- Country item -->
+                  <label
+                    v-for="item in country"
+                    :key="item.label"
+                    :for="item.label"
+                    class="cursor-pointer"
+                  >
+                    <input type="radio" name="country" :id="item.label" :value="item.label" :checked="item.label === 'Iceland'" class="hidden peer sr-only">
+                    <span
+                      class="flex justify-center items-center flex-col gap-3.75 p-3.75 text-gray-100 outline outline-stroke-100 rounded-lg peer-checked:bg-gray-200 peer-checked:text-black"
+                    >
+                      <img :src="item.flag" :alt="item.label" class="h-6">
+                      {{ item.label }}
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Divider -->
+              <div class="border-t border-t-stroke-100"></div>
+
+              <!-- Cities -->
+              <div class="p-5">
+                <p class="font-medium mb-5">Cities</p>
+
+                <!-- Cities list -->
+                <div class="rounded-lg overflow-hidden max-h-119.25 overflow-y-auto">
+                  <label
+                    v-for="city in cities"
+                    :key="city.name"
+                    :for="city.name"
+                    class="flex gap-2.5 p-3.75 items-center text-gray-100 font-medium leading-5.75 hover:bg-gray-200 cursor-pointer has-checked:bg-gray-200"
+                  >
+                    <input type="checkbox" name="cities" :value="city.name" :id="city.name" class="hidden peer sr-only">
+                    <span class="size-4 rounded-sm bg-white inline-flex justify-center items-center outline outline-gray-300 peer-checked:bg-blue-50 peer-checked:outline-blue-700 [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100">
+                      <!-- Icon display when input is checked -->
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 3L4.5 8.5L2 6" stroke="#3398FF" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span class="text-black">{{ city.name }}</span>
+                    <span>{{ city.properties }} properties</span>
+                  </label>
+                </div>
+              </div>
+            </template>
+          </SearchFormDropdown>
         </div>
 
         <!-- When -->
-        <div class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden lg:after:block after:hidden">
+        <div
+          class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden lg:after:block after:hidden"
+          @click="selectWhen"
+        >
           <p class="text-gray-100">When</p>
           <button
             type="button"
@@ -33,17 +104,96 @@
           >
             Add dates
           </button>
+
+          <!-- Dropdown -->
+          <SearchFormDropdown
+            v-model="whenDropdown"
+            @close="whenDropdown = false"
+            @click.stop
+            class="min-w-210 -left-full!"
+          >
+            <template #title>
+              When
+            </template>
+
+            <template #content>
+              <VueDatePicker
+                v-model="date"
+                range
+                multi-calendars
+                inline
+                auto-apply
+                :time-config="{ enableTimePicker: false }"
+              >
+                <template #month-year="{ month, year, months, handleMonthYearChange }">
+                  <div class="custom-header w-full text-center mb-5 relative">
+                    <button @click="handleMonthYearChange(false)" class="absolute left-0 cursor-pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 17L10 12L14 7" stroke="#777777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+
+                    <!-- Month and year label -->
+                    <span class="month-label text-center text-lg font-semibold">{{ months[month]?.text }} {{ year }}</span>
+                  </div>
+                </template>
+
+                <template #calendar-header="{ day }">
+                  <div class="h-5 text-gray-100 text-sm font-medium">
+                    {{ day }}
+                  </div>
+                </template>
+              </VueDatePicker>
+            </template>
+          </SearchFormDropdown>
         </div>
 
         <!-- Who -->
-        <div class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden">
+        <div
+          class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden"
+          @click="selectGuests"
+        >
           <p class="text-gray-100">Who</p>
           <button
             type="button"
             class="text-black cursor-pointer"
           >
-            Add guests and rooms
+            Add guests
           </button>
+
+          <!-- Dropdown -->
+          <SearchFormDropdown
+            v-model="guestsDropdown"
+            @close="guestsDropdown = false"
+            @click.stop
+            class="min-w-100"
+          >
+            <template #title>
+              Who
+            </template>
+
+            <template #content>
+              <div class="p-5 space-y-5">
+                <!-- Guests -->
+                <div class="flex justify-between items-center">
+                  Guests
+                  <Counter v-model="guests" :max="20" />
+                </div>
+
+                <!-- Bedrooms -->
+                <div class="flex justify-between items-center">
+                  Bedrooms
+                  <Counter v-model="bedrooms" :max="5" />
+                </div>
+
+                <!-- Bathrooms -->
+                <div class="flex justify-between items-center">
+                  Bathrooms
+                  <Counter v-model="bathrooms" :max="3" />
+                </div>
+              </div>
+            </template>
+          </SearchFormDropdown>
         </div>
 
         <!-- Action -->
@@ -158,7 +308,7 @@
     as="button"
     variant="primary"
     size="xl"
-    class="fixed bottom-10 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap"
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 z-1 whitespace-nowrap"
     @click="toggleView"
   >
     Switch to {{ viewLabels[viewType] }} view
@@ -172,6 +322,12 @@
 <script setup>
 import { ref , computed , onMounted , onUnmounted } from 'vue'
 import Button from '@/components/Button.vue'
+
+import { VueDatePicker } from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+
+import SearchFormDropdown from '@/components/SearchFormDropdown.vue'
+import Counter from '@/components/Counter.vue'
 
 // Toogle the view list/map
 const viewLabels = {
@@ -349,4 +505,88 @@ onMounted(() => {
 })
 
 onUnmounted(() => observer?.disconnect())
+
+// Dropdown 'Where'
+const whereDropdown = ref(false)
+const selectWhere = () => {
+  whereDropdown.value = !whereDropdown.value
+}
+
+const country = ([
+  {
+    flag: '/flag/Iceland.png',
+    label: 'Iceland',
+  },
+  {
+    flag: '/flag/Sweden.png',
+    label: 'Sweden',
+  },
+  {
+    flag: '/flag/Norway.png',
+    label: 'Norway',
+  },
+  {
+    flag: '/flag/Denmark.png',
+    label: 'Denmark',
+  },
+])
+
+const cities = [
+  { id: 1, name: 'Reykjavík',     properties: 10 },
+  { id: 2, name: 'Hafnarfjörður', properties: 8  },
+  { id: 3, name: 'Reykjanesbær', properties: 6  },
+  { id: 4, name: 'Akureyri',      properties: 3  },
+  { id: 5, name: 'Garðabær',      properties: 6  },
+  { id: 6, name: 'Mosfellsbær',   properties: 7  },
+  { id: 7, name: 'Akranes',       properties: 2  },
+  { id: 8, name: 'Selfoss',       properties: 1  },
+  { id: 9, name: 'Ísafjörður',    properties: 4  },
+  { id: 10, name: 'Additional city',    properties: 4  },
+  { id: 11, name: 'For display scrollbar',    properties: 4  },
+  { id: 11, name: 'When list has a lot items',    properties: 4  },
+]
+
+// When dropdown (select date)
+const whenDropdown = ref(false)
+const date = ref(new Date())
+
+const selectWhen = () => {
+  whenDropdown.value = !whenDropdown.value
+}
+
+// Guests and rooms drodown
+const guestsDropdown = ref(false)
+const selectGuests = () => {
+  guestsDropdown.value = !guestsDropdown.value
+}
+
+const guests = ref(1)
+const bedrooms = ref(1)
+const bathrooms = ref(1)
 </script>
+
+<style scoped>
+:deep(.dp--theme-light) {
+  --dp-font-family: "Mona Sans", sans-serif;
+  --dp-menu-min-width: 800px;
+  --dp-border-color: #fff;
+  --dp-menu-border-color: #fff;
+  --dp-menu-padding: 24px;
+  --dp-cell-padding: 0;
+  --dp-font-size: 14px;
+  --dp-two-calendars-spacing: 24px;
+  --dp-row-margin: 4px 0px;
+  /* --dp-text-color: #777777; */
+  --dp-secondary-color: rgba(30, 30, 30, 0.2);
+
+  --dp-primary-color: #1E1E1E;
+  --dp-primary-text-color: #ffffff;
+  --dp-border-radius: 8px;
+  --dp-cell-border-radius: 50%;
+  --dp-range-between-dates-background-color: #f5f3ef;
+
+	--dp-cell-size: 30px;
+	--dp-button-height: 30px;
+
+}
+</style>
