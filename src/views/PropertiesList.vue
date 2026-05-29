@@ -31,7 +31,7 @@
             v-model="whereDropdown"
             @close="whereDropdown = false"
             @click.stop
-            class="min-w-125"
+            class="w-full xs:min-w-125"
           >
             <template #title>
               Where
@@ -39,7 +39,7 @@
 
             <template #content>
               <!-- Country -->
-              <div class="p-5">
+              <div class="p-2.5 xs:p-5">
                 <p class="font-medium mb-5">Country</p>
 
                 <div class="grid grid-cols-4 gap-2.5">
@@ -52,7 +52,7 @@
                   >
                     <input type="radio" name="country" :id="item.label" :value="item.label" :checked="item.label === 'Iceland'" class="hidden peer sr-only">
                     <span
-                      class="flex justify-center items-center flex-col gap-3.75 p-3.75 text-gray-100 outline outline-stroke-100 rounded-lg peer-checked:bg-gray-200 peer-checked:text-black"
+                      class="flex justify-center items-center flex-col gap-3.75 p-3.75 text-sm xs:text-base text-gray-100 outline outline-stroke-100 rounded-lg peer-checked:bg-gray-200 peer-checked:text-black"
                     >
                       <img :src="item.flag" :alt="item.label" class="h-6">
                       {{ item.label }}
@@ -65,7 +65,7 @@
               <div class="border-t border-t-stroke-100"></div>
 
               <!-- Cities -->
-              <div class="p-5">
+              <div class="p-2.5 xs:p-5">
                 <p class="font-medium mb-5">Cities</p>
 
                 <!-- Cities list -->
@@ -110,7 +110,7 @@
             v-model="whenDropdown"
             @close="whenDropdown = false"
             @click.stop
-            class="min-w-210 -left-full!"
+            class="w-full md:min-w-210 left-0 md:-left-full!"
           >
             <template #title>
               When
@@ -120,7 +120,7 @@
               <VueDatePicker
                 v-model="date"
                 range
-                multi-calendars
+                
                 inline
                 auto-apply
                 :time-config="{ enableTimePicker: false }"
@@ -166,7 +166,7 @@
             v-model="guestsDropdown"
             @close="guestsDropdown = false"
             @click.stop
-            class="min-w-100"
+            class="w-full xs:min-w-100"
           >
             <template #title>
               Who
@@ -198,7 +198,12 @@
 
         <!-- Action -->
         <div class="inline-flex gap-2.5">
-          <Button as="button" variant="secondary" class="max-lg:justify-center max-lg:flex-1">
+          <Button
+            as="button"
+            variant="secondary"
+            class="max-lg:justify-center max-lg:flex-1"
+            @click="openAllFilters = true"
+          >
 						Filters
 
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -227,88 +232,24 @@
   </section>
 
   <!-- List view -->
-  <div class="max-w-323 mx-auto mt-7.5 px-4 pb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7.5">
-    <!-- Properties -->
-    <div
-      class="rounded-lg p-5 relative aspect-square flex flex-col justify-end items-start text-white overflow-hidden"
-      v-for="item in visibleApartments"
-      :key="item.id"
-    >
-      <img :src="item.image" :alt="item.title" class="absolute inset-0 object-cover h-full w-full">
-      <!-- Details -->
-      <div class="relative w-full z-1">
-        <h3 class="font-semibold text-xl mb-2.5">{{ item.name }}</h3>
-        <p class="font-medium text-lg">Starting from ${{ item.priceFrom }}<span v-if="item.priceTo !== null">-{{ item.priceTo }}</span></p>
-        <!-- Additional info -->
-        <div class="mt-3.75 pt-3.75 border-t border-stroke-100 flex gap-2.5">
-          <div class="rounded-[90px] border border-white/20 p-2.5 inline-flex gap-2.5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="10" cy="13.75" rx="5" ry="2.08333" stroke="white" stroke-width="1.25" stroke-linejoin="round"/>
-              <circle cx="10" cy="6.66663" r="2.5" stroke="white" stroke-width="1.25" stroke-linejoin="round"/>
-              <path d="M5.37378 11.0513C4.61416 11.4633 4.02847 11.9754 3.68335 12.5503C3.47768 12.6052 3.28854 12.667 3.1189 12.7349C2.78582 12.8681 2.55789 13.0113 2.42358 13.1382C2.29286 13.2618 2.29175 13.3285 2.29175 13.3335C2.29177 13.3393 2.29397 13.4052 2.42358 13.5278C2.55783 13.6548 2.78572 13.7978 3.1189 13.9312C3.19299 13.9608 3.27103 13.9888 3.35229 14.0161C3.4179 14.542 3.67507 15.0371 4.08667 15.481C3.55695 15.3902 3.07186 15.259 2.65503 15.0923C2.23459 14.9241 1.85252 14.7077 1.56519 14.436C1.2766 14.1631 1.04186 13.7906 1.04175 13.3335C1.04182 12.8762 1.27653 12.503 1.56519 12.23C1.85248 11.9585 2.23473 11.7428 2.65503 11.5747C3.39154 11.2801 4.34077 11.0941 5.37378 11.0513Z" fill="white"/>
-              <path d="M14.6265 11.0513C15.6594 11.0941 16.6087 11.2801 17.3452 11.5747C17.7657 11.7429 18.1487 11.9583 18.436 12.23C18.7247 12.503 18.9584 12.8763 18.9585 13.3335C18.9584 13.7905 18.7245 14.1631 18.436 14.436C18.1487 14.7077 17.7657 14.9241 17.3452 15.0923C16.9282 15.2591 16.4425 15.3902 15.9126 15.481C16.3244 15.037 16.5813 14.5421 16.647 14.0161C16.7284 13.9887 16.8071 13.9609 16.8813 13.9312C17.2144 13.7979 17.4424 13.6547 17.5767 13.5278C17.7061 13.4053 17.7085 13.3393 17.7085 13.3335C17.7085 13.3285 17.7073 13.2618 17.5767 13.1382C17.4423 13.0113 17.2144 12.8681 16.8813 12.7349C16.7115 12.6669 16.5218 12.6053 16.3159 12.5503C15.9708 11.9755 15.3859 11.4632 14.6265 11.0513Z" fill="white"/>
-              <path d="M14.1665 5.20837C15.432 5.20855 16.4575 6.23482 16.4575 7.50037C16.4573 8.76576 15.4319 9.79121 14.1665 9.79138C13.7619 9.79131 13.3822 9.68542 13.0522 9.50134C13.3382 9.19356 13.5781 8.84282 13.7612 8.45935C13.8858 8.51204 14.0227 8.54133 14.1665 8.54138C14.7415 8.54121 15.2073 8.0754 15.2075 7.50037C15.2075 6.92518 14.7417 6.45855 14.1665 6.45837C14.1649 6.45837 14.1632 6.45837 14.1616 6.45837C14.1403 6.02585 14.052 5.61101 13.9087 5.22302C13.9933 5.21353 14.0793 5.20839 14.1665 5.20837Z" fill="white"/>
-              <path d="M5.83374 5.20837C5.92058 5.20839 6.00625 5.2136 6.09058 5.22302C5.94727 5.61095 5.85894 6.02593 5.83765 6.45837C5.83634 6.45837 5.83504 6.45837 5.83374 6.45837C5.25844 6.45837 4.79175 6.92507 4.79175 7.50037C4.79192 8.07551 5.25855 8.54138 5.83374 8.54138C5.9769 8.54134 6.11294 8.51161 6.23706 8.45935C6.42012 8.84292 6.66104 9.19347 6.94702 9.50134C6.61727 9.68519 6.23814 9.79133 5.83374 9.79138C4.5682 9.79138 3.54192 8.76587 3.54175 7.50037C3.54175 6.23471 4.56809 5.20837 5.83374 5.20837Z" fill="white"/>
-            </svg>
-            {{ item.guests }}
-          </div>
+  <PropertiesListView
+    v-if="viewType === 'list'"
+    :apartments="apartments"
+  />
 
-          <div class="rounded-[90px] border border-white/20 p-2.5 inline-flex gap-2.5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.1429 8.57141H8.57143C8.57143 7.81365 8.27041 7.08692 7.73459 6.55111C7.19877 6.01529 6.47205 5.71427 5.71429 5.71427H2.85714C2.3536 5.71638 1.86 5.85459 1.42857 6.11427V4.2857C1.42857 4.09626 1.35332 3.91458 1.21936 3.78062C1.08541 3.64667 0.903726 3.57141 0.714286 3.57141C0.524845 3.57141 0.343164 3.64667 0.209209 3.78062C0.0752549 3.91458 0 4.09626 0 4.2857V15.7143C0 15.9037 0.0752549 16.0854 0.209209 16.2193C0.343164 16.3533 0.524845 16.4286 0.714286 16.4286C0.903726 16.4286 1.08541 16.3533 1.21936 16.2193C1.35332 16.0854 1.42857 15.9037 1.42857 15.7143V14.2857H18.5714V15.7143C18.5714 15.9037 18.6467 16.0854 18.7806 16.2193C18.9146 16.3533 19.0963 16.4286 19.2857 16.4286C19.4752 16.4286 19.6568 16.3533 19.7908 16.2193C19.9247 16.0854 20 15.9037 20 15.7143V11.4286C20 10.6708 19.699 9.94407 19.1632 9.40825C18.6273 8.87243 17.9006 8.57141 17.1429 8.57141ZM2.85714 7.14284H5.71429C6.09317 7.14284 6.45653 7.29335 6.72444 7.56126C6.99235 7.82917 7.14286 8.19253 7.14286 8.57141H1.42857C1.42857 8.19253 1.57908 7.82917 1.84699 7.56126C2.1149 7.29335 2.47826 7.14284 2.85714 7.14284ZM1.42857 12.8571V9.99998H17.1429C17.5217 9.99998 17.8851 10.1505 18.153 10.4184C18.4209 10.6863 18.5714 11.0497 18.5714 11.4286V12.8571H1.42857Z" fill="white"/>
-            </svg>
-            {{ item.bedrooms }}
-          </div>
-
-          <div class="rounded-[90px] border border-white/20 p-2.5 inline-flex gap-2.5">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.3401 6.66663V13.3333M4.03686 6.66663V13.3333M12.918 15.8333H6.45898M12.918 4.16663L6.45898 4.16663M3.22949 6.66663H4.84424C5.73604 6.66663 6.45898 5.92043 6.45898 4.99996V3.33329C6.45898 2.41282 5.73604 1.66663 4.84424 1.66663H3.22949C2.33769 1.66663 1.61475 2.41282 1.61475 3.33329V4.99996C1.61475 5.92043 2.33769 6.66663 3.22949 6.66663ZM14.5327 6.66663H16.1475C17.0393 6.66663 17.7622 5.92043 17.7622 4.99996V3.33329C17.7622 2.41282 17.0393 1.66663 16.1475 1.66663H14.5327C13.6409 1.66663 12.918 2.41282 12.918 3.33329V4.99996C12.918 5.92043 13.6409 6.66663 14.5327 6.66663ZM3.22949 18.3333H4.84424C5.73604 18.3333 6.45898 17.5871 6.45898 16.6666V15C6.45898 14.0795 5.73604 13.3333 4.84424 13.3333H3.22949C2.33769 13.3333 1.61475 14.0795 1.61475 15V16.6666C1.61475 17.5871 2.33769 18.3333 3.22949 18.3333ZM14.5327 18.3333H16.1475C17.0393 18.3333 17.7622 17.5871 17.7622 16.6666V15C17.7622 14.0795 17.0393 13.3333 16.1475 13.3333H14.5327C13.6409 13.3333 12.918 14.0795 12.918 15V16.6666C12.918 17.5871 13.6409 18.3333 14.5327 18.3333Z" stroke="white" stroke-width="1.25" stroke-linecap="round"/>
-            </svg>
-            {{ item.area }}
-          </div>
-        </div>
-      </div>
-
-      <!-- Blur effect at the bottom -->
-      <div class="progressive-blur bg-dark/20 absolute left-0 bottom-0 w-full h-1/2"></div>
-    </div>
-  </div>
-
-  <!-- Sentinel + Loading -->
-  <div ref="sentinel" class="pb-17.5 flex justify-center">
-    <!-- Loading -->
-    <div
-      v-if="isLoading"
-      class="inline-flex p-3 items-center gap-3.75 rounded-[90px] text-black font-semibold border border-stroke-100 bg-white"
-    >
-      Loading properties
-      <!-- Icon -->
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="animate-spin" xmlns="http://www.w3.org/2000/svg">
-        <ellipse opacity="0.4" cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(1 0 0 -1 8.33325 18.3333)" fill="#1E1E1E"/>
-        <ellipse opacity="0.4" cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(1 0 0 -1 8.33325 5)" fill="#1E1E1E"/>
-        <ellipse cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(0.5 -0.866025 -0.866025 -0.5 16.3833 15.6099)" fill="#1E1E1E"/>
-        <ellipse opacity="0.4" cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(0.5 -0.866025 -0.866025 -0.5 4.83643 8.94336)" fill="#1E1E1E"/>
-        <ellipse opacity="0.4" cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(-0.5 -0.866025 -0.866025 0.5 18.05 7.27661)" fill="#1E1E1E"/>
-        <ellipse opacity="0.4" cx="1.66667" cy="1.66667" rx="1.66667" ry="1.66667" transform="matrix(-0.5 -0.866025 -0.866025 0.5 6.50317 13.9434)" fill="#1E1E1E"/>
-      </svg>
-    </div>
-
-    <!-- End -->
-    <!--<p
-      v-else-if="!hasMore"
-      class="text-sm text-[--color-text-muted]"
-    >
-      All properties shown
-    </p>-->
-
-  </div>
+  <!-- Map view -->
+  <PropertiesMapView
+    v-if="viewType === 'map'"
+    :apartments="apartments"
+  />
 
   <!-- Fixed button at button for switch between list/map view -->
   <Button
     as="button"
     variant="primary"
     size="xl"
-    class="fixed bottom-10 left-1/2 -translate-x-1/2 z-1 whitespace-nowrap"
+    class="fixed bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap"
+    :class="viewType == 'list' ? 'z-1' : 'z-999'"
     @click="toggleView"
   >
     Switch to {{ viewLabels[viewType] }} view
@@ -317,10 +258,264 @@
       <path d="M10 7L14 12L10 17" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </Button>
+
+  <!-- All filters modal -->
+  <div
+    class="fixed w-full h-full inset-0 bg-dark/20 flex flex-col justify-center items-center z-20 px-4 py-[5%]"
+    v-show="openAllFilters"
+    @click="openAllFilters = false"
+  >
+    <div
+      class="bg-white border border-stroke-100 w-full overflow-hidden max-w-250 pb-28 relative rounded-lg"
+      @click.stop
+    >
+      <div class="bg-gray-200 p-3.75 border-b border-b-stroke-100 flex justify-between font-medium text-base">
+				Filters
+
+				<!-- Close button -->
+				<button
+					type="button"
+					class="cursor-pointer"
+					@click="openAllFilters = false"
+				>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M15.7123 16.7729C16.0052 17.0658 16.4801 17.0658 16.7729 16.7729C17.0658 16.48 17.0658 16.0052 16.7729 15.7123L13.0607 12L16.7729 8.2877C17.0658 7.99481 17.0658 7.51993 16.7729 7.22704C16.48 6.93415 16.0052 6.93415 15.7123 7.22704L12 10.9393L8.28766 7.22699C7.99477 6.9341 7.5199 6.9341 7.227 7.22699C6.93411 7.51989 6.93411 7.99476 7.227 8.28765L10.9393 12L7.22699 15.7123C6.9341 16.0052 6.9341 16.4801 7.22699 16.773C7.51989 17.0659 7.99476 17.0659 8.28765 16.773L12 13.0606L15.7123 16.7729Z" fill="#1E1E1E"/>
+					</svg>
+				</button>
+			</div>
+
+      <!-- Content -->
+      <div class="h-full overflow-y-auto">
+        <!-- Price range -->
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Price range</p>
+          
+          <!-- Min & Max -->
+          <div class="flex justify-between items-center">
+            <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
+              Min
+              <b class="text-black font-medium">$1000</b>
+            </span>
+
+            <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
+              Max
+              <b class="text-black font-medium">$2000+</b>
+            </span>
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Size <span class="text-gray-100">(sq ft)</span></p>
+
+          <Slider
+            v-model="sizeRange"
+            :min="100"
+            :max="1500"
+            :range="true"
+            :tooltips="false"
+          />
+          
+          <!-- Min & Max -->
+          <div class="flex justify-between items-center">
+            <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
+              Min
+              <b class="text-black font-medium">{{ sizeRange[0].toLocaleString() }} sq ft</b>
+            </span>
+
+            <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
+              Max
+              <b class="text-black font-medium">{{ sizeRange[1].toLocaleString() }} sq ft</b>
+            </span>
+          </div>
+        </div>
+
+        <!-- Smoking -->
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Smoking allowed</p>
+
+          <!-- Toogle -->
+          <ToggleButton v-model="smokingAllowed" :name="'smokingAllowed'" />
+        </div>
+
+        <!-- Pets -->
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Pets allowed</p>
+
+          <!-- Toogle -->
+          <ToggleButton v-model="petsAllowed" :name="'petsAllowed'" />
+        </div>
+
+        <!-- Amenities -->
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Amenities</p>
+
+          <div class="space-y-2.5">
+            <p class="text-base">Popular</p>
+
+            <div class="flex items-center gap-2.5 overflow-x-auto p-px no-scrollbar">
+              <label
+                v-for="item in popular"
+                :key="item.label"
+                class="whitespace-nowrap"
+              >
+                <input
+                  type="checkbox"
+                  name="popular"
+                  class="peer sr-only hidden"
+                  :value="item.value"
+                >
+                <span class="inline-flex rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-sm font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-2.5">
+            <p class="text-base">Essentials</p>
+
+            <div class="flex items-center gap-2.5 overflow-x-auto p-px no-scrollbar">
+              <label
+                v-for="item in essentials"
+                :key="item.label"
+                class="whitespace-nowrap"
+              >
+                <input
+                  type="checkbox"
+                  name="essentials"
+                  class="peer sr-only hidden"
+                  :value="item.value"
+                >
+                <span class="inline-flex rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-sm font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-2.5">
+            <p class="text-base">Features</p>
+
+            <div class="flex items-center gap-2.5 overflow-x-auto p-px no-scrollbar">
+              <label
+                v-for="item in features"
+                :key="item.label"
+                class="whitespace-nowrap"
+              >
+                <input
+                  type="checkbox"
+                  name="features"
+                  class="peer sr-only hidden"
+                  :value="item.value"
+                >
+                <span class="inline-flex rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-sm font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-2.5">
+            <p class="text-base">Safety</p>
+
+            <div class="flex items-center gap-2.5 overflow-x-auto p-px no-scrollbar">
+              <label
+                v-for="item in safety"
+                :key="item.label"
+                class="whitespace-nowrap"
+              >
+                <input
+                  type="checkbox"
+                  name="safety"
+                  class="peer sr-only hidden"
+                  :value="item.value"
+                >
+                <span class="inline-flex rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-sm font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
+          <p class="font-semibold text-lg">Accessibility features</p>
+
+          <div class="space-y-3.75">
+            <p class="text-base">Guest entrance and parking</p>
+
+            <div class="flex flex-col items-start gap-3.75">
+              <label
+                v-for="item in guestsEntrance"
+                :key="item.label"
+                class="flex gap-2.5 items-center text-gray-100 font-medium text-sm leading-5 cursor-pointer"
+              >
+                <input type="checkbox" name="guests_entrance" :value="item.label" class="hidden peer sr-only">
+                <span class="size-4 rounded-sm bg-white inline-flex justify-center items-center outline outline-gray-300 peer-checked:bg-blue-50 peer-checked:outline-blue-700 [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100">
+                  <!-- Icon display when input is checked -->
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="#3398FF" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-3.75">
+            <p class="text-base">Bedroom</p>
+
+            <div class="flex flex-col items-start gap-3.75">
+              <label
+                v-for="item in bedroomFeatures"
+                :key="item.label"
+                class="flex gap-2.5 items-center text-gray-100 font-medium text-sm leading-5 cursor-pointer"
+              >
+                <input type="checkbox" name="bedroom_features" :value="item.label" class="hidden peer sr-only">
+                <span class="size-4 rounded-sm bg-white inline-flex justify-center items-center outline outline-gray-300 peer-checked:bg-blue-50 peer-checked:outline-blue-700 [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100">
+                  <!-- Icon display when input is checked -->
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="#3398FF" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-3.75">
+            <p class="text-base">Bathroom</p>
+
+            <div class="flex flex-col items-start gap-3.75">
+              <label
+                v-for="item in bathroomFeatures"
+                :key="item.label"
+                class="flex gap-2.5 items-center text-gray-100 font-medium text-sm leading-5 cursor-pointer"
+              >
+                <input type="checkbox" name="bathroom_features" :value="item.label" class="hidden peer sr-only">
+                <span class="size-4 rounded-sm bg-white inline-flex justify-center items-center outline outline-gray-300 peer-checked:bg-blue-50 peer-checked:outline-blue-700 [&>svg]:opacity-0 peer-checked:[&>svg]:opacity-100">
+                  <!-- Icon display when input is checked -->
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 3L4.5 8.5L2 6" stroke="#3398FF" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span>{{ item.label }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="border-t border-t-stroke-100 p-2.5 bg-white w-full absolute bottom-0 left-0 flex">
+        <Button
+          as="button"
+          variant="primary"
+          class="ml-auto"
+          @click="openAllFilters = false"
+        >
+          Show 24 properties
+        </Button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref , computed , onMounted , onUnmounted } from 'vue'
+import { ref } from 'vue'
 import Button from '@/components/Button.vue'
 
 import { VueDatePicker } from '@vuepic/vue-datepicker'
@@ -329,19 +524,25 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import SearchFormDropdown from '@/components/SearchFormDropdown.vue'
 import Counter from '@/components/Counter.vue'
 
+import Slider from '@vueform/slider'
+import '@vueform/slider/themes/default.css'
+import ToggleButton from '@/components/ToggleButton.vue'
+
+import PropertiesListView from '@/components/PropertiesListView.vue'
+import PropertiesMapView from '@/components/PropertiesMapView.vue'
+
 // Toogle the view list/map
 const viewLabels = {
-  list: 'list',
-  map: 'map'
+  list: 'map',
+  map: 'list'
 }
 
-const viewType = ref('map')
+const viewType = ref('list')
 
 const toggleView = () => {
   viewType.value = viewType.value === 'list' ? 'map' : 'list'
 }
 
-const batchSize = 3
 const apartments = ref([
   {
     id: 1,
@@ -351,7 +552,9 @@ const apartments = ref([
     guests: 7,
     bedrooms: 7,
     area: 1200,
-    image: '/properties/1.webp'
+    image: '/properties/1.webp',
+    lat: 64.1355,
+    lng: -21.8954
   },
   {
     id: 2,
@@ -361,7 +564,9 @@ const apartments = ref([
     guests: 7,
     bedrooms: 4,
     area: 1000,
-    image: '/properties/2.webp'
+    image: '/properties/2.webp',
+    lat: 64.0669,
+    lng: -21.9403
   },
   {
     id: 3,
@@ -371,7 +576,9 @@ const apartments = ref([
     guests: 7,
     bedrooms: 10,
     area: 1200,
-    image: '/properties/3.webp'
+    image: '/properties/3.webp',
+    lat: 63.9179,
+    lng: -22.6823
   },
   {
     id: 4,
@@ -381,7 +588,9 @@ const apartments = ref([
     guests: 8,
     bedrooms: 4,
     area: 2000,
-    image: '/properties/4.webp'
+    image: '/properties/4.webp',
+    lat: 65.6885,
+    lng: -18.1059
   },
   {
     id: 5,
@@ -391,7 +600,9 @@ const apartments = ref([
     guests: 10,
     bedrooms: 5,
     area: 3200,
-    image: '/properties/5.webp'
+    image: '/properties/5.webp',
+    lat: 64.0837,
+    lng: -21.9241
   },
   {
     id: 6,
@@ -401,7 +612,9 @@ const apartments = ref([
     guests: 6,
     bedrooms: 4,
     area: 2400,
-    image: '/properties/6.webp'
+    image: '/properties/6.webp',
+    lat: 64.1659,
+    lng: -21.6938
   },
   {
     id: 7,
@@ -411,7 +624,9 @@ const apartments = ref([
     guests: 8,
     bedrooms: 4,
     area: 1830,
-    image: '/properties/7.webp'
+    image: '/properties/7.webp',
+    lat: 64.3236,
+    lng: -22.0702
   },
   {
     id: 8,
@@ -422,7 +637,9 @@ const apartments = ref([
     bedrooms: 8,
     area: 4300,
     areaLabel: '4,300+ sq ft',
-    image: '/properties/8.webp'
+    image: '/properties/8.webp',
+    lat: 63.9330,
+    lng: -20.9977
   },
   {
     id: 9,
@@ -432,7 +649,9 @@ const apartments = ref([
     guests: 10,
     bedrooms: 5,
     area: 3550,
-    image: '/properties/9.webp'
+    image: '/properties/9.webp',
+    lat: 66.0757,
+    lng: -23.1353
   },
   {
     id: 10,
@@ -442,7 +661,9 @@ const apartments = ref([
     guests: 10,
     bedrooms: 8,
     area: 2800,
-    image: '/properties/10.webp'
+    image: '/properties/10.webp',
+    lat: 64.1120,
+    lng: -21.9129
   },
   {
     id: 11,
@@ -452,7 +673,9 @@ const apartments = ref([
     guests: 10,
     bedrooms: 5,
     area: 1500,
-    image: '/properties/11.webp'
+    image: '/properties/11.webp',
+    lat: 64.1583,
+    lng: -22.0000
   },
   {
     id: 12,
@@ -462,49 +685,12 @@ const apartments = ref([
     guests: 10,
     bedrooms: 6,
     area: 2906,
-    image: '/properties/12.webp'
+    image: '/properties/12.webp',
+    lat: 64.0973,
+    lng: -22.0538
   }
 ])
-const visibleCount = ref(6)
-const isLoading = ref(false)
-const sentinel = ref(null)
 
-const visibleApartments = computed(() =>
-  apartments.value.slice(0, visibleCount.value)
-)
-
-const hasMore = computed(() =>
-  visibleCount.value < apartments.value.length
-)
-
-const loadMore = () => {
-  if (isLoading.value || !hasMore.value) return
-
-  isLoading.value = true
-
-  setTimeout(() => {
-    visibleCount.value = Math.min(
-      visibleCount.value + batchSize,
-      apartments.value.length
-    )
-    isLoading.value = false
-  }, 1000) // remove setTimeout when added real API
-}
-
-let observer = null
-
-onMounted(() => {
-  observer = new IntersectionObserver(
-    (entries) => {
-      if (entries[0].isIntersecting) loadMore()
-    },
-    { threshold: 0.1 }
-  )
-
-  if (sentinel.value) observer.observe(sentinel.value)
-})
-
-onUnmounted(() => observer?.disconnect())
 
 // Dropdown 'Where'
 const whereDropdown = ref(false)
@@ -563,9 +749,135 @@ const selectGuests = () => {
 const guests = ref(1)
 const bedrooms = ref(1)
 const bathrooms = ref(1)
+
+// All filters
+const openAllFilters = ref(false)
+
+const sizeRange = ref([100, 1500])
+
+// Other filters
+const smokingAllowed = ref(true)
+const petsAllowed = ref(true)
+const popular = ([
+  {
+    label: 'Air conditioning',
+    value: 'air conditioning',
+  },
+  {
+    label: 'Free parking',
+    value: 'free parking',
+  },
+  {
+    label: 'TV',
+    value: 'tv',
+  },
+  {
+    label: 'Kitchen',
+    value: 'kitchen',
+  },
+  {
+    label: 'Iron',
+    value: 'iron',
+  },
+  {
+    label: 'Hair dryer',
+    value: 'hair dryer',
+  },
+])
+
+const essentials = ([
+  {
+    label: 'Wi-Fi',
+    value: 'wifi',
+  },
+  {
+    label: 'Washer',
+    value: 'washer',
+  },
+  {
+    label: 'Dryer',
+    value: 'dryer',
+  },
+  {
+    label: 'Heating',
+    value: 'heating',
+  },
+  {
+    label: 'Dedicated workspace',
+    value: 'dedicated workspace',
+  }
+])
+
+const features = ([
+  {
+    label: 'Pool',
+    value: 'pool',
+  },
+  {
+    label: 'Hot tub',
+    value: 'hot tub',
+  },
+  {
+    label: 'EV charger',
+    value: 'ev charger',
+  },
+  {
+    label: 'Baby crib',
+    value: 'baby crib',
+  },
+  {
+    label: 'King bed',
+    value: 'king bed',
+  },
+  {
+    label: 'Gym',
+    value: 'gym',
+  },
+  {
+    label: 'Breakfast',
+    value: 'breakfast',
+  },
+  {
+    label: 'Indoor fireplace',
+    value: 'indoor fireplace',
+  }
+])
+
+const safety = ([
+  {
+    label: 'Smoke alarm',
+    value: 'smoke alarm',
+  },
+  {
+    label: 'Carbon monoxide alarm',
+    value: 'carbon monoxide alarm',
+  }
+])
+
+const guestsEntrance = ([
+  { label: 'Step-free access' },
+  { label: 'Disabled parking spot' },
+  { label: 'Guest entrance wider than 32 inches' }
+])
+
+const bedroomFeatures = ([
+  { label: 'Step-free access' },
+  { label: 'Guest entrance wider than 32 inches' }
+])
+
+const bathroomFeatures = ([
+  { label: 'Step-free access' },
+  { label: 'Disabled parking spot' },
+  { label: 'Guest entrance wider than 32 inches' },
+  { label: 'Toilet grab bar' },
+  { label: 'Shower grab bar' },
+  { label: 'Step-free shower' },
+  { label: 'Shower or bath chair' },
+])
 </script>
 
 <style scoped>
+/* Calendar styling */
 :deep(.dp--theme-light) {
   --dp-font-family: "Mona Sans", sans-serif;
   --dp-menu-min-width: 800px;
@@ -587,6 +899,16 @@ const bathrooms = ref(1)
 
 	--dp-cell-size: 30px;
 	--dp-button-height: 30px;
+}
 
+/* Size range styling */
+.slider-horizontal {
+  --slider-height: 10px;
+  --slider-bg: rgba(0, 117, 222, 0.2);
+  --slider-connect-bg: rgba(0, 117, 222, 0.7);
+  --slider-handle-width: 17px;
+  --slider-handle-height: 17px;
+  --slider-handle-bg: #F1EFEE;
+  --slider-handle-shadow: none;
 }
 </style>
