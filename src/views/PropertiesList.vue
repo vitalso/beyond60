@@ -11,7 +11,7 @@
       <div class="bg-white border border-stroke-100 rounded-3xl lg:rounded-[90px] max-w-250 mx-auto px-3 max-md:py-3 md:px-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center gap-y-1 md:gap-y-5 gap-x-10 lg:gap-10">
         <!-- Where -->
         <div
-          class="p-3.75 space-y-1.25 font-medium tetx-base relative divider last:after:hidden"
+          class="p-3.75 space-y-1.25 font-medium text-base relative divider last:after:hidden"
           @click="selectWhere"
         >
           <p class="text-gray-100">Where</p>
@@ -31,7 +31,7 @@
             v-model="whereDropdown"
             @close="whereDropdown = false"
             @click.stop
-            class="w-full xs:min-w-125"
+            class="w-full sm:min-w-125"
           >
             <template #title>
               Where
@@ -102,7 +102,8 @@
             type="button"
             class="text-black cursor-pointer"
           >
-            Add dates
+            <span v-if="!date">Add dates</span>
+            <span v-else class="whitespace-nowrap text-sm">{{ formattedDate }}</span>
           </button>
 
           <!-- Dropdown -->
@@ -110,24 +111,25 @@
             v-model="whenDropdown"
             @close="whenDropdown = false"
             @click.stop
-            class="w-full md:min-w-210 left-0 md:-left-full!"
+            class="w-full md:min-w-210 left-0 md:-left-full! max-mg:right-0"
           >
             <template #title>
               When
             </template>
 
             <template #content>
+              <div class="max-lg:p-5">
               <VueDatePicker
                 v-model="date"
                 range
-                
-                inline
+                :multi-calendars="isDesktop"
+                :inline="isDesktop"
                 auto-apply
                 :time-config="{ enableTimePicker: false }"
               >
-                <template #month-year="{ month, year, months, handleMonthYearChange }">
+                <template #month-year="{ month, year, months, handleMonthYearChange, instance }">
                   <div class="custom-header w-full text-center mb-5 relative">
-                    <button @click="handleMonthYearChange(false)" class="absolute left-0 cursor-pointer">
+                    <button v-if="instance === 0" @click="handleMonthYearChange(false)" class="absolute left-0 cursor-pointer">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 17L10 12L14 7" stroke="#777777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                       </svg>
@@ -135,6 +137,18 @@
 
                     <!-- Month and year label -->
                     <span class="month-label text-center text-lg font-semibold">{{ months[month]?.text }} {{ year }}</span>
+
+                    <button v-if="instance === 0" v-show="!isDesktop" @click="handleMonthYearChange(true)" class="absolute right-0 cursor-pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 7L14 12L10 17" stroke="#777777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
+
+                    <button v-if="instance === 1" @click="handleMonthYearChange(true)" class="absolute right-0 cursor-pointer">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 7L14 12L10 17" stroke="#777777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </button>
                   </div>
                 </template>
 
@@ -144,6 +158,7 @@
                   </div>
                 </template>
               </VueDatePicker>
+              </div>
             </template>
           </SearchFormDropdown>
         </div>
@@ -289,17 +304,25 @@
         <!-- Price range -->
         <div class="px-5 py-8.75 space-y-5 not-last:border-b not-last:border-b-stroke-100">
           <p class="font-semibold text-lg">Price range</p>
+
+          <Slider
+            v-model="priceRange"
+            :min="1000"
+            :max="2000"
+            :range="true"
+            :tooltips="false"
+          />
           
           <!-- Min & Max -->
           <div class="flex justify-between items-center">
             <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
               Min
-              <b class="text-black font-medium">$1000</b>
+              <b class="text-black font-medium">${{ priceRange[0].toLocaleString() }}</b>
             </span>
 
             <span class="inline-flex outline outline-stroke-100 rounded-[90px] p-3 gap-2.5 text-gray-100 font-medium">
               Max
-              <b class="text-black font-medium">$2000+</b>
+              <b class="text-black font-medium">${{ priceRange[1].toLocaleString() }}</b>
             </span>
           </div>
         </div>
@@ -515,7 +538,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref , computed } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 import Button from '@/components/Button.vue'
 
 import { VueDatePicker } from '@vuepic/vue-datepicker'
@@ -734,11 +758,26 @@ const cities = [
 
 // When dropdown (select date)
 const whenDropdown = ref(false)
-const date = ref(new Date())
+const date = ref(null)
+const { width } = useWindowSize()
+const isDesktop = computed(() => width.value >= 1024)
 
 const selectWhen = () => {
   whenDropdown.value = !whenDropdown.value
 }
+
+const formattedDate = computed(() => {
+  if (!date.value || !date.value[0]) return ''
+  
+  const options = { day: 'numeric', month: 'long', year: 'numeric' }
+  
+  const start = new Date(date.value[0]).toLocaleDateString('en-US', options)
+  const end = date.value[1] 
+    ? new Date(date.value[1]).toLocaleDateString('en-US', options) 
+    : ''
+  
+  return end ? `${start} — ${end}` : start
+})
 
 // Guests and rooms drodown
 const guestsDropdown = ref(false)
@@ -753,6 +792,7 @@ const bathrooms = ref(1)
 // All filters
 const openAllFilters = ref(false)
 
+const priceRange = ref([1000, 2000])
 const sizeRange = ref([100, 1500])
 
 // Other filters
@@ -880,7 +920,7 @@ const bathroomFeatures = ([
 /* Calendar styling */
 :deep(.dp--theme-light) {
   --dp-font-family: "Mona Sans", sans-serif;
-  --dp-menu-min-width: 800px;
+  /* --dp-menu-min-width: 800px; */
   --dp-border-color: #fff;
   --dp-menu-border-color: #fff;
   --dp-menu-padding: 24px;
@@ -899,6 +939,44 @@ const bathroomFeatures = ([
 
 	--dp-cell-size: 30px;
 	--dp-button-height: 30px;
+}
+
+:deep(.dp--input) {
+  border: 1px solid #E5E5E5;
+}
+
+@media screen and (min-width: 1024px) {
+  :deep(.dp--theme-light) {
+    --dp-menu-min-width: 800px;
+  }
+
+  :deep(.dp--cell-inner) {
+    width: 100%;
+  }
+
+  :deep(.dp--range-border-start) {
+    border-radius: 16px 0 0 16px;
+  }
+
+  :deep(.dp--range-border-end) {
+    border-radius: 0 16px 16px 0;
+  }
+
+  :deep(.dp--today) {
+    border-radius: 16px;
+  }
+
+  :deep(.dp--today.dp--range-border-start) {
+    border-radius: 16px 0 0 16px;
+  }
+
+  :deep(.dp--today.dp--range-border-end) {
+    border-radius: 0 16px 16px 0;
+  }
+
+  :deep(.dp--today.dp--range-border-end.dp--range-border-end) {
+    border-radius: 16px;
+  }
 }
 
 /* Size range styling */

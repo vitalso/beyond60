@@ -1,7 +1,7 @@
 <template>
 	<div
 		ref="dropdown"
-		class="bg-white rounded-lg border border-stroke-100 absolute top-[calc(100%+10px)] left-0 z-10 overflow-hidden"
+		class="bg-white rounded-lg border border-stroke-100 absolute top-[calc(100%+10px)] left-0 z-10"
 		v-show="modelValue"
 	>
 		<!-- Heading -->
