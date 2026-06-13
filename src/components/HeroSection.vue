@@ -41,10 +41,10 @@
 import { ref } from 'vue'
 import Button from '../components/Button.vue'
 
-import HomeIcon from '@/assets/icons/home.svg'
-import LockIcon from '@/assets/icons/lock.svg'
-import StarIcon from '@/assets/icons/star.svg'
-import UserPolygonIcon from '@/assets/icons/user-polygon.svg'
+import HomeIcon from '@/assets/icons/home.svg?url'
+import LockIcon from '@/assets/icons/lock.svg?url'
+import StarIcon from '@/assets/icons/star.svg?url'
+import UserPolygonIcon from '@/assets/icons/user-polygon.svg?url'
 
 const bottomCards = ref([
 	{

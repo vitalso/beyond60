@@ -98,15 +98,15 @@
 <script setup>
 import { ref } from 'vue'
 
-import LogoVerticalWhite from '../assets/logo-vertical-white.svg'
+import LogoVerticalWhite from '../assets/logo-vertical-white.svg?url'
 import Button from '@/components/Button.vue'
 import ReviewsSection from '@/components/ReviewsSection.vue'
 import FAQSection from '@/components/FAQSection.vue'
 import JoinSection from '@/components/JoinSection.vue'
 
-import UsersIcon from '@/assets/icons/users.svg'
-import BriefcaseIcon from '@/assets/icons/briefcase.svg'
-import ChartIcon from '@/assets/icons/chart-arrow-up.svg'
+import UsersIcon from '@/assets/icons/users.svg?url'
+import BriefcaseIcon from '@/assets/icons/briefcase.svg?url'
+import ChartIcon from '@/assets/icons/chart-arrow-up.svg?url'
 
 const aboutInfo = ref([
 	{

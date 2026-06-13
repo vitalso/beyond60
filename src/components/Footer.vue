@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import Logo from '../assets/logo.svg';
+import Logo from '../assets/logo.svg?url';
 import { RouterLink } from 'vue-router';
 import Button from './Button.vue';
 </script>

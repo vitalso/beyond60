@@ -63,7 +63,7 @@ const steps = [
 	{ id: 'Offer', component: PropertyOffer },
 ]
 
-const currentIndex = ref(2)
+const currentIndex = ref(0)
 const currentStep = computed(() => steps[currentIndex.value])
 const isFirst = computed(() => currentIndex.value === 0)
 const isLast  = computed(() => currentIndex.value === steps.length - 1)

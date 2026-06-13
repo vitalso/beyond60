@@ -50,12 +50,12 @@
 </template>
 
 <script setup>
-import Logo from '@/assets/logo.svg'
+import Logo from '@/assets/logo.svg?url'
 
-import Dashboard from '@/assets/icons/admin/grid.svg'
-import Listings from '@/assets/icons/admin/home-graph.svg'
-import Reservations from '@/assets/icons/admin/calendar-check.svg'
-import Inquiries from '@/assets/icons/admin/chatting.svg'
+import Dashboard from '@/assets/icons/admin/grid.svg?url'
+import Listings from '@/assets/icons/admin/home-graph.svg?url'
+import Reservations from '@/assets/icons/admin/calendar-check.svg?url'
+import Inquiries from '@/assets/icons/admin/chatting.svg?url'
 
 const menuItems = [
 	{ name: 'Dashboard', path: '/admin' , icon: Dashboard },

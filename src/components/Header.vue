@@ -58,7 +58,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Logo from '../assets/logo.svg'
+import Logo from '../assets/logo.svg?url'
 
 import Button from './Button.vue'
 

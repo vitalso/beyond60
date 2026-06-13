@@ -9,7 +9,7 @@
 				:checked="modelValue === true"
         @change="emit('update:modelValue', true)"
 			/>
-			<span class="text-sm font-semibold text-gray-100 inline-flex p-2.5 gap-2.5 items-center leading-3.75 rounded-[90px] peer-checked:text-white peer-checked:bg-black peer-checked:[&>svg]:fill-white transition-all duration-200">
+			<span class="text-sm font-semibold text-gray-100 inline-flex p-2.5 gap-2.5 items-center leading-3.75 rounded-[90px] peer-checked:text-white peer-checked:bg-black [&>svg]:fill-gray-100 peer-checked:[&>svg]:fill-white transition-all duration-200">
 				<slot name="iconYes" />
 				Yes
 			</span>
@@ -24,7 +24,7 @@
 				:checked="modelValue === false"
         @change="emit('update:modelValue', false)"
 			/>
-			<span class="text-sm font-semibold text-gray-100 inline-flex p-2.5 gap-2.5 items-center leading-3.75 rounded-[90px] peer-checked:text-white peer-checked:bg-black peer-checked:[&>svg]:fill-white transition-all duration-200">
+			<span class="text-sm font-semibold text-gray-100 inline-flex p-2.5 gap-2.5 items-center leading-3.75 rounded-[90px] peer-checked:text-white peer-checked:bg-black [&>svg]:fill-gray-100 peer-checked:[&>svg]:fill-white transition-all duration-200">
 				<slot name="iconNo" />
 				No
 			</span>

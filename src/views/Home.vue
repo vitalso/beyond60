@@ -175,7 +175,7 @@
 <script setup>
 import { ref } from 'vue'
 import HeroSection from '@/components/HeroSection.vue';
-import LogoVertical from '@/assets/logo-vertical.svg';
+import LogoVertical from '@/assets/logo-vertical.svg?url';
 
 import Button from '@/components/Button.vue';
 import PropertiesPreview from '@/components/PropertiesPreview.vue';

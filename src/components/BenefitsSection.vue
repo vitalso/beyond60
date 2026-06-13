@@ -62,12 +62,12 @@
 import { ref } from 'vue'
 import Button from './Button.vue'
 
-import SmartHouseIcon from '@/assets/icons/smart-home.svg'
-import ShieldIcon from '@/assets/icons/shield.svg'
-import LockIcon from '@/assets/icons/lock.svg'
-import SparkleIcon from '@/assets/icons/sparkles.svg'
-import TaskIcon from '@/assets/icons/task-check.svg'
-import SmartHomeWaveIcon from '@/assets/icons/home-wave.svg'
+import SmartHouseIcon from '@/assets/icons/smart-home.svg?url'
+import ShieldIcon from '@/assets/icons/shield.svg?url'
+import LockIcon from '@/assets/icons/lock.svg?url'
+import SparkleIcon from '@/assets/icons/sparkles.svg?url'
+import TaskIcon from '@/assets/icons/task-check.svg?url'
+import SmartHomeWaveIcon from '@/assets/icons/home-wave.svg?url'
 
 const benefits = ref([
 	{
