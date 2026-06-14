@@ -1,40 +1,67 @@
 <template>
 	<div>
-		<div class="text-center text-gray-100 mb-2.5">
+		<div class="md:text-center text-gray-100 mb-5">
 			<h2 class="font-semibold text-[35px] mb-2.5 text-black">What is the address of your property?</h2>
 			<p class="font-medium inline-flex items-center gap-2">
 				<!-- Icon -->
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="size-6">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="size-6 shrink-0">
 					<path d="M8 18H16M8 18C8 20.2091 9.79086 22 12 22C14.2091 22 16 20.2091 16 18M8 18V15.7887C8 15.1349 7.66659 14.5363 7.19153 14.0871C5.84201 12.8111 5 11.0039 5 9C5 5.13401 8.13401 2 12 2C15.866 2 19 5.13401 19 9C19 11.0039 18.158 12.8111 16.8085 14.0871C16.3334 14.5363 16 15.1349 16 15.7887V18M10 9L12 11M12 11L14 9M12 11V18" stroke="#777777" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 				Search or enter an address located in Iceland, Sweden, Norway, or Denmark</p>
 		</div>
 
 		<!-- Form -->
-		<div class="p-5 flex flex-col gap-5 rounded-lg border border-stroke-100 bg-gray-200 max-w-152.5 mx-auto">
+		<div class="p-3.75 md:p-5 flex flex-col gap-5 rounded-lg border border-stroke-100 bg-gray-200 max-w-152.5 mx-auto">
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">Street address <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<input type="text" placeholder="Karl Johans gate" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none" required>
+				<input
+					type="text"
+					placeholder="Karl Johans gate"
+					:value="modelValue.address.street"
+					@input="update('street', $event.target.value)"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none"
+					required
+				>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">Address complement</span>
-				<input type="text" placeholder="E.g residence" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none">
+				<input
+					type="text"
+					placeholder="E.g residence"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none"
+					:value="modelValue.address.complement"
+					@input="update('complement', $event.target.value)"
+				>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">Postal code <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<input type="text" placeholder="0154" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none" required>
+				<input
+					type="text" 
+					placeholder="0154"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none"
+					:value="modelValue.address.postalCode"
+					@input="update('postalCode', $event.target.value)"
+					required
+				>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">City <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<input type="text" placeholder="Oslo" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none" required>
+				<input
+					type="text"
+					placeholder="Oslo"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100 text-black outline-none"
+					:value="modelValue.address.city"
+					@input="update('city', $event.target.value)"
+					required
+				>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">Country <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<div class="grid grid-cols-4 gap-2.5">
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-2.5">
 					<!-- Country item -->
 					<label
 						v-for="item in country"
@@ -42,7 +69,14 @@
 						:for="item.label"
 						class="cursor-pointer"
 					>
-						<input type="radio" name="country" :id="item.label" :value="item.label" :checked="item.label === 'Iceland'" class="hidden peer sr-only">
+						<input
+							type="radio"
+							name="country"
+							:id="item.label"
+							:checked="item.label === 'Iceland'"
+							class="hidden peer sr-only"
+							:value="modelValue.address.country"
+							@input="update('country', item.label)">
 						<span
 							class="flex justify-center items-center flex-col gap-3.75 p-3.75 text-sm xs:text-base text-gray-100 outline outline-stroke-100 rounded-lg peer-checked:bg-white peer-checked:text-black"
 						>
@@ -62,7 +96,7 @@
 </template>
 
 <script setup>
-/*const props = defineProps({
+const props = defineProps({
   modelValue: { type: Object, required: true },
 })
 
@@ -71,9 +105,9 @@ const emit = defineEmits(['update:modelValue'])
 const update = (field, value) => {
   emit('update:modelValue', {
     ...props.modelValue,
-    personal: { ...props.modelValue.personal, [field]: value },
+    address: { ...props.modelValue.address, [field]: value },
   })
-}*/
+}
 
 const country = ([
   {

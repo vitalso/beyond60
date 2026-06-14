@@ -10,7 +10,7 @@
 			<div>
 				<p class="mb-2.5 text-lg">Pets allowed</p>
 				<!-- Toogle -->
-        <ToggleButton v-model="petsAllowed" :name="'petsAllowed'">
+				<ToggleButton v-model="petsAllowed" :name="'petsAllowed'">
 					<template #iconYes>
 						<IconPetsAllowed />
 					</template>
@@ -23,7 +23,7 @@
 			<div>
 				<p class="mb-2.5 text-lg">Smoking allowed</p>
 				<!-- Toogle -->
-        <ToggleButton v-model="smokingAllowed" :name="'smokingAllowed'">
+				<ToggleButton v-model="smokingAllowed" :name="'smokingAllowed'">
 					<template #iconYes>
 						<IconSmokingAllowed />
 					</template>
@@ -118,7 +118,7 @@
 			<div>
 				<p class="mb-2.5 text-lg">Smoke alarm</p>
 				<!-- Toogle -->
-        <ToggleButton v-model="smokeAlarm" :name="'smokeAlaram'">
+				<ToggleButton v-model="smokeAlarm" :name="'smokeAlaram'">
 					<template #iconYes>
 						<IconSmokeAlarm />
 					</template>
@@ -131,7 +131,7 @@
 			<div>
 				<p class="mb-2.5 text-lg">Carbon monoxide alarm</p>
 				<!-- Toogle -->
-        <ToggleButton v-model="monoxideAlarm" :name="'monoxideAlaram'">
+				<ToggleButton v-model="monoxideAlarm" :name="'monoxideAlaram'">
 					<template #iconYes>
 						<IconMonoxideAlarm />
 					</template>
@@ -173,33 +173,33 @@ import IconHairDryer from '@/assets/icons/amenities/Hair-dryer.svg?component'
 
 const popular = ([
   {
-    label: 'Air conditioning',
-    value: 'air conditioning',
+	label: 'Air conditioning',
+	value: 'air conditioning',
 	icon: IconAirConditioning,
   },
   {
-    label: 'Free parking',
-    value: 'free parking',
+	label: 'Free parking',
+	value: 'free parking',
 	icon: IconFreeParking,
   },
   {
-    label: 'TV',
-    value: 'tv',
+	label: 'TV',
+	value: 'tv',
 	icon: IconTV,
   },
   {
-    label: 'Kitchen',
-    value: 'kitchen',
+	label: 'Kitchen',
+	value: 'kitchen',
 	icon: IconKitchen,
   },
   {
-    label: 'Iron',
-    value: 'iron',
+	label: 'Iron',
+	value: 'iron',
 	icon: IconIron,
   },
   {
-    label: 'Hair dryer',
-    value: 'hair dryer',
+	label: 'Hair dryer',
+	value: 'hair dryer',
 	icon: IconHairDryer,
   },
 ])
@@ -213,28 +213,28 @@ import IconDedicatedWorkspace from '@/assets/icons/amenities/Dedicated-workspace
 
 const essentials = ([
   {
-    label: 'Wi-Fi',
-    value: 'wifi',
+	label: 'Wi-Fi',
+	value: 'wifi',
 		icon: IconWifi,
   },
   {
-    label: 'Washer',
-    value: 'washer',
+	label: 'Washer',
+	value: 'washer',
 		icon: IconWasher,
   },
   {
-    label: 'Dryer',
-    value: 'dryer',
+	label: 'Dryer',
+	value: 'dryer',
 		icon: IconDryer,
   },
   {
-    label: 'Heating',
-    value: 'heating',
+	label: 'Heating',
+	value: 'heating',
 		icon: IconHeating,
   },
   {
-    label: 'Dedicated workspace',
-    value: 'dedicated workspace',
+	label: 'Dedicated workspace',
+	value: 'dedicated workspace',
 		icon: IconDedicatedWorkspace,
   }
 ])
@@ -251,43 +251,43 @@ import IconIndoorFireplace from '@/assets/icons/amenities/Indoor-fireplace.svg?c
 
 const features = ([
   {
-    label: 'Pool',
-    value: 'pool',
+	label: 'Pool',
+	value: 'pool',
 		icon: IconPool,
   },
   {
-    label: 'Hot tub',
-    value: 'hot tub',
+	label: 'Hot tub',
+	value: 'hot tub',
 		icon: IconHotTub,
   },
   {
-    label: 'EV charger',
-    value: 'ev charger',
+	label: 'EV charger',
+	value: 'ev charger',
 		icon: IconEVCharger,
   },
   {
-    label: 'Baby crib',
-    value: 'baby crib',
+	label: 'Baby crib',
+	value: 'baby crib',
 		icon: IconBabyCrib,
   },
   {
-    label: 'King bed',
-    value: 'king bed',
+	label: 'King bed',
+	value: 'king bed',
 		icon: IconKingBed,
   },
   {
-    label: 'Gym',
-    value: 'gym',
+	label: 'Gym',
+	value: 'gym',
 		icon: IconGym,
   },
   {
-    label: 'Breakfast',
-    value: 'breakfast',
+	label: 'Breakfast',
+	value: 'breakfast',
 		icon: IconBreakfast,
   },
   {
-    label: 'Indoor fireplace',
-    value: 'indoor fireplace',
+	label: 'Indoor fireplace',
+	value: 'indoor fireplace',
 		icon: IconIndoorFireplace,
   }
 ])
