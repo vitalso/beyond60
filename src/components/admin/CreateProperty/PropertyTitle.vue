@@ -15,19 +15,34 @@
 					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-13.25 placeholder:text-gray-100/50 text-black outline-none"
 					required
 					maxlength="50"
-					v-model="title"
+					:value="modelValue.title.name"
+					@input="update('name', $event.target.value)"
 				>
-				<span class="text-sm font-medium text-gray-100">{{ title.length }}/50</span>
+				<span class="text-sm font-medium text-gray-100">{{ modelValue.title.name.length }}/50</span>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full">
 				<span class="inline-flex gap-1 items-center">Description <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<textarea placeholder="Tell guests what they can expect from your property…" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-34.25 placeholder:text-gray-100/50 text-black outline-none resize-none" required></textarea>
+				<textarea
+					placeholder="Tell guests what they can expect from your property…"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 h-34.25 placeholder:text-gray-100/50 text-black outline-none resize-none"
+					required
+					:value="modelValue.title.description"
+					@input="update('description', $event.target.value)"
+				>
+				</textarea>
 			</label>
 
 			<label class="flex flex-col gap-2.5 w-full relative">
 				<span class="inline-flex gap-1 items-center">Base pirce per night <span class="text-gray-100">(USD)</span> <sup class="text-accent-red top-auto text-lg">*</sup></span>
-				<input type="text" placeholder="e.g 1 100" class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 pl-11.25 h-13.25 placeholder:text-gray-100 text-black outline-none" required>
+				<input
+					type="text"
+					placeholder="e.g 1 100"
+					class="w-full rounded-lg bg-white border border-stroke-100 p-3.75 pl-11.25 h-13.25 placeholder:text-gray-100 text-black outline-none"
+					required
+					:value="modelValue.title.price"
+					@input="update('price', $event.target.value)"
+				>
 				<IconPrice class="absolute left-3.75 bottom-4" />
 			</label>
 		</div>
@@ -36,8 +51,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import IconPrice from '@/assets/icons/amenities/direction-down.svg?component'
 
-const title = ref('')
+const props = defineProps({
+  modelValue: { type: Object, required: true },
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const update = (field, value) => {
+  emit('update:modelValue', {
+    ...props.modelValue,
+    title: { ...props.modelValue.title, [field]: value },
+  })
+}
 </script>

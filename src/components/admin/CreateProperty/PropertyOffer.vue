@@ -10,7 +10,11 @@
 			<div>
 				<p class="mb-2.5 text-lg">Pets allowed</p>
 				<!-- Toogle -->
-				<ToggleButton v-model="petsAllowed" :name="'petsAllowed'">
+				<ToggleButton
+					:model-value="modelValue.offer.pets"
+					@update:model-value="update('pets', $event)"
+					:name="'petsAllowed'"
+				>
 					<template #iconYes>
 						<IconPetsAllowed />
 					</template>
@@ -23,7 +27,11 @@
 			<div>
 				<p class="mb-2.5 text-lg">Smoking allowed</p>
 				<!-- Toogle -->
-				<ToggleButton v-model="smokingAllowed" :name="'smokingAllowed'">
+				<ToggleButton
+					:model-value="modelValue.offer.smoking"
+					@update:model-value="update('smoking', $event)"
+					:name="'smokingAllowed'"
+				>
 					<template #iconYes>
 						<IconSmokingAllowed />
 					</template>
@@ -53,6 +61,7 @@
 							name="popular"
 							class="peer sr-only hidden"
 							:value="item.value"
+							@change="update('popular', item.value)"
 						>
 						<span class="inline-flex items-center gap-2.5 rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-base font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">
 							<component :is="item.icon" />
@@ -76,6 +85,7 @@
 							name="popular"
 							class="peer sr-only hidden"
 							:value="item.value"
+							@change="update('essentials', item.value)"
 						>
 						<span class="inline-flex items-center gap-2.5 rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-base font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">
 							<component :is="item.icon" />
@@ -99,6 +109,7 @@
 							name="popular"
 							class="peer sr-only hidden"
 							:value="item.value"
+							@change="update('features', item.value)"
 						>
 						<span class="inline-flex items-center gap-2.5 rounded-[90px] py-3 px-2.5 outline outline-stroke-100 bg-white text-gray-100 text-base font-semibold leading-3.75 cursor-pointer peer-checked:bg-black peer-checked:text-white">
 							<component :is="item.icon" />
@@ -118,7 +129,11 @@
 			<div>
 				<p class="mb-2.5 text-lg">Smoke alarm</p>
 				<!-- Toogle -->
-				<ToggleButton v-model="smokeAlarm" :name="'smokeAlaram'">
+				<ToggleButton
+					:model-value="modelValue.offer.smokealarm"
+					@update:model-value="update('smokealarm', $event)"
+					:name="'smokeAlaram'"
+				>
 					<template #iconYes>
 						<IconSmokeAlarm />
 					</template>
@@ -131,7 +146,11 @@
 			<div>
 				<p class="mb-2.5 text-lg">Carbon monoxide alarm</p>
 				<!-- Toogle -->
-				<ToggleButton v-model="monoxideAlarm" :name="'monoxideAlaram'">
+				<ToggleButton
+					:model-value="modelValue.offer.monoxide"
+					@update:model-value="update('monoxide', $event)"
+					:name="'monoxideAlaram'"
+				>
 					<template #iconYes>
 						<IconMonoxideAlarm />
 					</template>
@@ -145,8 +164,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import ToggleButton from '@/components/ToggleButton.vue'
+
+const props = defineProps({
+  modelValue: { type: Object, required: true },
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const update = (field, value) => {
+  emit('update:modelValue', {
+    ...props.modelValue,
+    offer: {
+      ...props.modelValue.offer,
+      [field]: value,
+    },
+  })
+}
 
 // Icons
 import IconPetsAllowed from '@/assets/icons/amenities/pets.svg?component'
@@ -158,10 +192,10 @@ import IconSmokeAlarmNot from '@/assets/icons/amenities/smoke-detector-no.svg?co
 import IconMonoxideAlarm from '@/assets/icons/amenities/detector.svg?component'
 import IconMonoxideAlarmNot from '@/assets/icons/amenities/detector-no.svg?component'
 
-const petsAllowed = ref(true)
+/*const petsAllowed = ref(true)
 const smokingAllowed = ref(true)
 const smokeAlarm = ref(true)
-const monoxideAlarm = ref(true)
+const monoxideAlarm = ref(true)*/
 
 // Icons
 import IconAirConditioning from '@/assets/icons/amenities/Air-conditioning.svg?component'

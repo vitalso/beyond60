@@ -9,7 +9,13 @@
 			<div class="p-5 flex items-center font-medium justify-between text-xl gap-3.75">
 				<span class="font-medium">Size</span>
 				<label>
-					<input type="text" placeholder="e.g. 1100" class="text-xl appearance-none outline-none text-gray-100 max-w-20">
+					<input
+						type="text"
+						placeholder="e.g. 1100"
+						class="text-xl appearance-none outline-none text-gray-100 max-w-20"
+						:value="modelValue.details.size"
+						@input="update('size', $event)"
+					>
 					m<sup>2</sup>
 				</label>
 			</div>
@@ -19,7 +25,11 @@
 
 			<div class="p-5 flex items-center font-medium justify-between text-xl gap-3.75">
 				Guest
-				<Counter v-model="guests" :max="20" />
+				<Counter
+					:model-value="modelValue.details.guests"
+					@update:model-value="update('guests', $event)"
+					:max="20"
+				/>
 			</div>
 
 			<!-- Divider -->
@@ -27,7 +37,11 @@
 
 			<div class="p-5 flex items-center font-medium justify-between text-xl gap-3.75">
 				Bedrooms
-				<Counter v-model="bedrooms" :max="20" />
+				<Counter
+					:model-value="modelValue.details.bedrooms"
+					@update:model-value="update('bedrooms', $event)"
+					:max="20"
+				/>
 			</div>
 
 			<!-- Divider -->
@@ -35,17 +49,32 @@
 
 			<div class="p-5 flex items-center font-medium justify-between text-xl gap-3.75">
 				Bathrooms
-				<Counter v-model="bathrooms" :max="20" />
+				<Counter
+					:model-value="modelValue.details.bathrooms"
+					@update:model-value="update('bathrooms', $event)"
+					:max="20"
+				/>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import Counter from '@/components/Counter.vue'
 
-const guests = ref(1)
-const bedrooms = ref(1)
-const bathrooms = ref(1)
+const props = defineProps({
+  modelValue: { type: Object, required: true },
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const update = (field, value) => {
+  emit('update:modelValue', {
+    ...props.modelValue,
+    details: {
+      ...props.modelValue.details,
+      [field]: value,
+    },
+  })
+}
 </script>

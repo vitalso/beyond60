@@ -78,6 +78,10 @@ const prev = () => { if (!isFirst.value) currentIndex.value-- }
 
 const formData = ref({
 	address: { street: '', complement: '', postalCode: '', city: '', country: '' },
+	details: { size: '', guests: 1, bedrooms: 1, bathrooms: 1 },
+	offer: { pets: null, smoking: null , popular: [], essentials: [], features: [], smokealarm: null, monoxide: null },
+	photos: [],
+	title: { name: '', description: '' , price: ''},
   // personal: { name: '', email: '' },
   // property: { title: '', price: null },
 })

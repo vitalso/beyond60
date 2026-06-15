@@ -8,7 +8,8 @@
 			</RouterLink>
 
 			<nav
-				class="hidden lg:flex gap-2.5 p-1.25 rounded-lg bg-gray-200 mx-auto"
+				class="lg:flex gap-2.5 p-1.25 rounded-lg bg-gray-200 mx-auto"
+				:class="isMenuOpen ? 'flex max-lg:flex-col max-lg:w-full max-lg:absolute max-lg:left-0 max-lg:top-16.25 max-lg:z-2 max-lg:h-full border-b border-b-stroke-100' : 'hidden'"
 			>
 				<RouterLink
 					v-for="item in menuItems"
@@ -22,7 +23,10 @@
 			</nav>
 
 			<!-- User Profile -->
-			<div class="hidden lg:flex gap-3.75 items-center">
+			<div
+				class="lg:flex gap-3.75 items-center"
+				:class="isMenuOpen ? 'flex max-lg:flex-col max-lg:items-start max-lg:w-full max-lg:absolute max-lg:left-0 max-lg:bottom-0 max-lg:p-4 max-lg:z-2' : 'hidden'"
+			>
 				<!-- Notification -->
 				<button type="button" class="size-10 p-2 rounded-full bg-gray-200 flex flex-col items-center justify-center cursor-pointer">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -32,15 +36,15 @@
 				</button>
 
 				<!-- User -->
-				<div class="rounded-lg p-2 gap-2.5 flex items-center bg-gray-200">
+				<div class="rounded-lg p-2 gap-2.5 flex items-center bg-gray-200 cursor-pointer">
 					<!-- Picture -->
 					<div class="size-6 overflow-hidden rounded-full">
 						<img src="https://randomuser.me/api/portraits/men/24.jpg" alt="User profile picture" class="object-cover" />
 					</div>
 					<!-- Name -->
-					<span class="font-medium text-gray-700">Bergur H.</span>
+					<span class="font-medium text-gray-700 max-lg:hidden">Bergur H.</span>
 					<!-- Dropdown -->
-					<button type="button" class="cursor-pointer size-5">
+					<button type="button" class="size-5 max-lg:hidden">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 							<path d="M5.8335 8.33333L10.0002 11.6667L14.1668 8.33333" stroke="#777777" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
 						</svg>
@@ -63,6 +67,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import Logo from '@/assets/logo.svg?url'
 
 import Dashboard from '@/assets/icons/admin/grid.svg?url'
@@ -76,4 +81,9 @@ const menuItems = [
 	{ name: 'Reservations', path: '/admin/reservations' , icon: Reservations },
 	{ name: 'Inquiries', path: '/admin/inquiries' , icon: Inquiries },
 ]
+
+const isMenuOpen = ref(false)
+const toggleMenu = () => {
+	isMenuOpen.value = !isMenuOpen.value
+}
 </script>
