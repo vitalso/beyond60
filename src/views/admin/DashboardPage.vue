@@ -1,13 +1,13 @@
 <template>
 	<div class="min-h-[calc(100vh-96px)] flex flex-col justify-between">
 		<div class="py-7.5 md:py-20">
-			<div class="container">
+			<!-- <div class="container"> -->
 				<!-- Steps for create property form -->
 				<component
 					:is="currentStep.component"
 					v-model="formData"
 				/>
-			</div>
+			<!-- </div> -->
 		</div>
 
 		<!-- Bottom navigation -->
@@ -38,6 +38,7 @@
 					variant="primary"
 					size="large"
 					@click="next"
+					:class="isLast ? 'opacity-30 pointer-events-none' : ''"
 				>
 					Next
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -58,6 +59,7 @@ import PropertyDetails from '@/components/admin/CreateProperty/PropertyDetails.v
 import PropertyOffer from '@/components/admin/CreateProperty/PropertyOffer.vue'
 import PropertyPhotos from '@/components/admin/CreateProperty/PropertyPhotos.vue'
 import PropertyTitle from '@/components/admin/CreateProperty/PropertyTitle.vue'
+import PropertyPublished from '@/components/admin/CreateProperty/PropertyPublished.vue'
 
 const steps = [
 	{ id: 'Address', component: PropertyAddress },
@@ -65,6 +67,7 @@ const steps = [
 	{ id: 'Offer', component: PropertyOffer },
 	{ id: 'Photos', component: PropertyPhotos },
 	{ id: 'Title', component: PropertyTitle },
+	{ id: 'Published', component: PropertyPublished }
 ]
 
 const currentIndex = ref(0)
@@ -82,8 +85,6 @@ const formData = ref({
 	offer: { pets: null, smoking: null , popular: [], essentials: [], features: [], smokealarm: null, monoxide: null },
 	photos: [],
 	title: { name: '', description: '' , price: ''},
-  // personal: { name: '', email: '' },
-  // property: { title: '', price: null },
 })
 
 // const submit = () => console.log(formData.value)

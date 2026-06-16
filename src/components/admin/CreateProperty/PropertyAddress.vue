@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<div class="md:text-center text-gray-100 mb-5">
 			<h2 class="font-semibold text-[35px] mb-2.5 text-black">What is the address of your property?</h2>
 			<p class="font-medium inline-flex items-center gap-2">

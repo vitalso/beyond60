@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<div class="text-gray-100 mb-5 max-w-200 mx-auto">
 			<h2 class="font-semibold text-[35px] mb-2.5 text-black">Share your listing details</h2>
 			<p class="font-medium inline-flex items-center gap-2">Add a clear title and description for your property.</p>

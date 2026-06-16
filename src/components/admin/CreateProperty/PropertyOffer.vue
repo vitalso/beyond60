@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="container">
 		<div class="text-gray-100 mb-2.5 max-w-200 mx-auto">
 			<h2 class="font-semibold text-[35px] mb-2.5 text-black">What else does your property offer?</h2>
 			<p class="font-medium inline-flex items-center gap-2">Tell guests what’s included in your space.</p>
@@ -192,10 +192,6 @@ import IconSmokeAlarmNot from '@/assets/icons/amenities/smoke-detector-no.svg?co
 import IconMonoxideAlarm from '@/assets/icons/amenities/detector.svg?component'
 import IconMonoxideAlarmNot from '@/assets/icons/amenities/detector-no.svg?component'
 
-/*const petsAllowed = ref(true)
-const smokingAllowed = ref(true)
-const smokeAlarm = ref(true)
-const monoxideAlarm = ref(true)*/
 
 // Icons
 import IconAirConditioning from '@/assets/icons/amenities/Air-conditioning.svg?component'
