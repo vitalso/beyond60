@@ -33,7 +33,7 @@
 		</div>
 
 		<!-- Image listing -->
-		<div class="mt-15 flex gap-5 overflow-x-auto no-scrollbar max-md:pl-4">
+		<div class="mt-15 flex gap-5 lg:justify-center overflow-x-auto no-scrollbar max-md:pl-4">
 			<div
 				v-for="photo in modelValue.photos"
 				:key="photo.id"
